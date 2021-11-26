@@ -73,7 +73,7 @@ VFD_Comm_Errors VFD::writeRegister(VFD_Registers r, uint16_t value) {
   //  7. crc low
   //  8. crc high
 
-  while(comm_stream.available()) comm_stream.read(); // clear receive buffer!
+  while(comm_stream->available()) comm_stream->read(); // clear receive buffer!
 
   // Creating request
   uint8_t request[8] = {address, 0x06, (uint8_t)(r >> 8), (uint8_t)r, (uint8_t)(value >> 8), (uint8_t)value, 0x00, 0x00};
@@ -87,8 +87,8 @@ VFD_Comm_Errors VFD::writeRegister(VFD_Registers r, uint16_t value) {
   }
 
   delay(min_timing); // 3.5 char time delay
-  comm_stream.write(request, 8); // send request
-  comm_stream.flush(); // waiting end of transmission
+  comm_stream->write(request, 8); // send request
+  comm_stream->flush(); // waiting end of transmission
 
   if(comm_pin != -1) { // getting back to receive mode if needed
     digitalWrite(comm_pin, CP_RECEIVE_LEVEL);
@@ -96,15 +96,15 @@ VFD_Comm_Errors VFD::writeRegister(VFD_Registers r, uint16_t value) {
   
   // getting response
   long started = millis();
-  while(comm_stream.available() < 8 && millis()-started < COMM_TIMEOUT_TIME); // wait response
+  while(comm_stream->available() < 8 && millis()-started < COMM_TIMEOUT_TIME); // wait response
   // on write register response should be echo of request...
 
-  if(comm_stream.available() != -1 && comm_stream.available() < 8) { // data size mismatch
+  if(comm_stream->available() != -1 && comm_stream->available() < 8) { // data size mismatch
     last_error = VFD_COMM_ERROR_UNEXPECTED_RESPONSE;
     return VFD_COMM_ERROR_UNEXPECTED_RESPONSE; // unexpected result...
   }
 
-  if(comm_stream.available() == -1) {  // if nothing in buffer timeout happened
+  if(comm_stream->available() == -1) {  // if nothing in buffer timeout happened
     last_error = VFD_COMM_ERROR_NO_RESPONSE;
     return VFD_COMM_ERROR_NO_RESPONSE; // nothing in buffer...
   }
@@ -112,7 +112,7 @@ VFD_Comm_Errors VFD::writeRegister(VFD_Registers r, uint16_t value) {
   // get the data
   uint8_t response[8];
   int i = 0;
-  while(comm_stream.available()) response[i++] = comm_stream.read();
+  while(comm_stream->available()) response[i++] = comm_stream->read();
 
   // calc crc on the response
   uint16_t response_crc = calcCrc(response, 6); // calc on all bytes except 2 CRC bytes
@@ -147,7 +147,7 @@ VFD_Comm_Errors VFD::readMultipleRegisters(VFD_Registers start_register, uint8_t
   //  6. Number of register to read low
   //  7. crc low
   //  8. crc high
-  while(comm_stream.available()) comm_stream.read(); // clear read buffer!
+  while(comm_stream->available()) comm_stream->read(); // clear read buffer!
 
   uint8_t request[8] = {address, 0x03, (uint8_t)(start_register >> 8), (uint8_t)start_register, (uint8_t)(num_register >> 8), (uint8_t)num_register, 0x00, 0x00};
   uint16_t crc = calcCrc(request, 6); // calculating crc on 6 bytes
@@ -159,8 +159,8 @@ VFD_Comm_Errors VFD::readMultipleRegisters(VFD_Registers start_register, uint8_t
   }
 
   delay(min_timing); // 3.5 char time delay
-  comm_stream.write(request, 8);
-  comm_stream.flush(); // waiting end of transmission
+  comm_stream->write(request, 8);
+  comm_stream->flush(); // waiting end of transmission
 
   if(comm_pin != -1) { // getting back to receive mode if needed
     digitalWrite(comm_pin, CP_RECEIVE_LEVEL);
@@ -183,23 +183,23 @@ VFD_Comm_Errors VFD::readMultipleRegisters(VFD_Registers start_register, uint8_t
   int byte_to_read = 5+2*num_register;
 
   long started = millis();
-  while(comm_stream.available() < byte_to_read && millis()-started < COMM_TIMEOUT_TIME); // wait response
+  while(comm_stream->available() < byte_to_read && millis()-started < COMM_TIMEOUT_TIME); // wait response
 
-  if(comm_stream.available() == 0) { // no data received
+  if(comm_stream->available() == 0) { // no data received
     last_error = VFD_COMM_ERROR_NO_RESPONSE;
     return last_error; // nothing in buffer...
   }
 
-  if(comm_stream.available() != 0 && comm_stream.available() < byte_to_read) { // data size unexpected
+  /*if(comm_stream->available() != 0 && comm_stream->available() < byte_to_read) { // data size unexpected
     last_error = VFD_COMM_ERROR_UNEXPECTED_RESPONSE;
     return last_error; // unexpected result...
-  }
-  
+  }*/
+
   // get the data
   uint8_t response[byte_to_read];
   int i = 0;
-  while(comm_stream.available()) response[i++] = comm_stream.read();
-
+  while(comm_stream->available()) response[i++] = comm_stream->read();
+		
   // calc crc on the response
   uint16_t response_crc = calcCrc(response, (byte_to_read-2)); // calc on all bytes except 2 CRC bytes
   if((uint8_t)(response_crc >> 8) != response[(byte_to_read-2)] || (uint8_t)response_crc != response[(byte_to_read-1)]) { // CRC mismatch
@@ -234,7 +234,7 @@ uint16_t VFD::readRegister(VFD_Registers r) {
   //  6. Number of register to read low (we want only 1 so...) (1)
   //  7. crc low
   //  8. crc high
-  while(comm_stream.available()) comm_stream.read(); // clear read buffer!
+  while(comm_stream->available()) comm_stream->read(); // clear read buffer!
 
   uint8_t request[8] = {address, 0x03, (uint8_t)(r >> 8), (uint8_t)r, 0x00, 0x01, 0x00, 0x00};
   uint16_t crc = calcCrc(request, 6); // calculating crc on 6 bytes
@@ -246,8 +246,8 @@ uint16_t VFD::readRegister(VFD_Registers r) {
   }
 
   delay(min_timing); // 3.5 char time delay
-  comm_stream.write(request, 8);
-  comm_stream.flush(); // waiting end of transmission
+  comm_stream->write(request, 8);
+  comm_stream->flush(); // waiting end of transmission
 
   if(comm_pin != -1) { // getting back to receive mode if needed
     digitalWrite(comm_pin, CP_RECEIVE_LEVEL);
@@ -262,14 +262,14 @@ uint16_t VFD::readRegister(VFD_Registers r) {
   //  5 - CRC Low
   //  6 - CRC High
   long started = millis();
-  while(comm_stream.available() < 7 && millis()-started < COMM_TIMEOUT_TIME); // wait response
+  while(comm_stream->available() < 7 && millis()-started < COMM_TIMEOUT_TIME); // wait response
 
-  if(comm_stream.available() == 0) { // no data received
+  if(comm_stream->available() == 0) { // no data received
     last_error = VFD_COMM_ERROR_NO_RESPONSE;
     return 0; // nothing in buffer...
   }
 
-  if(comm_stream.available() != 0 && comm_stream.available() < 7) { // data size unexpected
+  if(comm_stream->available() != 0 && comm_stream->available() < 7) { // data size unexpected
     last_error = VFD_COMM_ERROR_UNEXPECTED_RESPONSE;
     return 0; // unexpected result...
   }
@@ -277,7 +277,7 @@ uint16_t VFD::readRegister(VFD_Registers r) {
   // get the data
   uint8_t response[7];
   int i = 0;
-  while(comm_stream.available()) response[i++] = comm_stream.read();
+  while(comm_stream->available()) response[i++] = comm_stream->read();
 
   // calc crc on the response
   uint16_t response_crc = calcCrc(response, 5); // calc on 5 bytes (avoid received CRC)
@@ -304,8 +304,7 @@ uint16_t VFD::readRegister(VFD_Registers r) {
 // class constructor(s)
 //VFD::VFD(uint8_t _address, HardwareSerial &_comm_stream) {
 VFD::VFD(uint8_t _address, Stream& _comm_stream) {
-  //comm_stream = &_comm_stream;
-  comm_stream = _comm_stream;
+  comm_stream = &_comm_stream;
   address = _address;
   baud_rate = 9600;
   comm_pin = -1;
@@ -316,8 +315,7 @@ VFD::VFD(uint8_t _address, Stream& _comm_stream) {
 }
 //VFD::VFD(uint8_t _address, HardwareSerial &_comm_stream, int baud) {
 VFD::VFD(uint8_t _address, Stream& _comm_stream, int baud) {
-  //comm_stream = &_comm_stream;
-  comm_stream = _comm_stream;
+  comm_stream = &_comm_stream;
   address = _address;
   baud_rate = baud;
   comm_pin = -1;
@@ -328,8 +326,7 @@ VFD::VFD(uint8_t _address, Stream& _comm_stream, int baud) {
 }
 //VFD::VFD(uint8_t _address, HardwareSerial &_comm_stream, int baud, uint8_t _comm_pin) {
 VFD::VFD(uint8_t _address, Stream& _comm_stream, int baud, uint8_t _comm_pin) {
-  //comm_stream = &_comm_stream;
-  comm_stream = _comm_stream;
+  comm_stream = &_comm_stream;
   address = _address;
   baud_rate = baud;
   comm_pin = _comm_pin;
@@ -478,9 +475,11 @@ char* VFD::lastCommError() {
 }
 
 // checks if motor is running
-bool VFD::isRunning() {
-  uint16_t command = readRegister(VFD_REGISTER_COMMAND);
-  return (command >> 1) & 0x01;
+int VFD::status() {
+  if(getRunFreq() == 0) return 0; // stopped
+ // if(readRegister(VFD_REGISTER_CURRENT_ACCEL_TIME) < readRegister(VFD_REGISTER_ACCEL_TIME)) return 2;
+ // if(readRegister(VFD_REGISTER_CURRENT_DECEL_TIME) < readRegister(VFD_REGISTER_DECEL_TIME)) return 3;
+  return 1;
 }
 
 // checks if motor is in forward direction

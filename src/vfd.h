@@ -59,6 +59,7 @@ enum VFD_Registers : uint16_t {
   VFD_REGISTER_ACCEL_TIME = 0x2002,  ///< RS485 Acceleration time
   VFD_REGISTER_DECEL_TIME = 0x2003, ///< RS485 Deceleration time register
   VFD_REGISTER_ERROR_CODE = 0x2008, ///< Error flag (Read only)
+  VFD_REGISTER_ACC_DEC_FLAG = 0x2010,	///< Acceleration/Deceleration flag
   VFD_REGISTER_AIM_FREQ = 0x200A, ///< Register of target frequency (Read only)
   VFD_REGISTER_RUN_FREQ = 0x200B, ///< Register of the frequency the vfd is at (Read only)
   VFD_REGISTER_OUT_CURR = 0x200C, ///< Register of the output current (Read only)
@@ -72,7 +73,7 @@ enum VFD_Registers : uint16_t {
 /// List of VFD Errors
 enum VFD_Errors : uint16_t {
   VFD_ERROR_NO_ERROR = 0x00,  ///< No error detected
-  VFD_ERROR_LOW_VOLTAGE = 16,//0,  ///< Power failure, supply voltage is above 140VAC (error 0 in manual)
+  VFD_ERROR_LOW_VOLTAGE = 16,  ///< Power failure, supply voltage is above 140VAC (error x in manual)
   VFD_ERROR_HIGH_VOLTAGE = 1, ///< Supply voltage is over 290VAC, internal bus voltage too high
   VFD_ERROR_GREAT_CURRENT = 2,  ///< Great current
   VFD_ERROR_EXTERNAL_PWM = 3, ///< Fault in external PWM circuit
@@ -107,7 +108,7 @@ class VFD {
 
   /// Stream class used for communication
   //HardwareSerial* comm_stream;
-  Stream& comm_stream;  
+  Stream* comm_stream;  
 
   /// Arduino pin for half-duplex converter. Setted at -1 if not needed
   int comm_pin;
@@ -362,9 +363,9 @@ public:
 
   /**
      * @brief Gets if inverter is running
-     * @return true if running, false otherwise
+     * @return 0 if stopped, 1 if running, 2 if accelerating/decelerating
   */
-  bool isRunning();
+  int status();
 
   /**
      * @brief Gets if inverter is in forward direction
