@@ -1,5 +1,5 @@
 # YL620 control library for arduino
-___
+
 
 ## Todo list
 
@@ -9,7 +9,7 @@ ___
 - [ ] Publish schematics and few pics/video as proof it's working
 - [ ] Write better documentation (hard task but somebody has to do it)
 
----
+
 
 ## Description
 
@@ -21,7 +21,6 @@ At this stage most of the main VFD functions are available (like start, stop, se
 ### Lot of testing is still needed, use at your own risk!
 
 
-___
 
 
 ## Connections
@@ -30,7 +29,7 @@ I'm using a MAX485 based conversion circuit, connecting RE and DE pins togheter 
 
 If you use full duplex adapter no comm_pin is needed and the library will handle that.
 
-___
+
 
 ## Parameters setup
 When controlling the VFD via RS485 you need to set the VFD to listen via RS485, accept input and set modbus address.
@@ -70,4 +69,4 @@ void setup() {
 }
 ```
 
-then check the [API](https://github.com/eNnvi/YL620-Arduino/doc/api.md) for full documentation
+then check the [API](https://github.com/eNnvi/YL620-Arduino/wiki/API) for full documentation

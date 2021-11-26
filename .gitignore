@@ -1,3 +1,4 @@
 /doc/xml
 Doxyfile
 generate_doc.bat
+.gitignore
