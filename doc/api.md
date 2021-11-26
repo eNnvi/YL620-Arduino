@@ -38,7 +38,7 @@
 `public float `[`getDecelTime`](#class_v_f_d_1a8b890ed8e80ef098083f0a292d4766cd)`()` | Get actual deceleration time.
 `public void `[`setDecelTime`](#class_v_f_d_1af8e1803ee4accbba46a6a5456a202988)`(float time)` | Sets deceleration time.
 `public char * `[`lastCommError`](#class_v_f_d_1ab89a8840263e507ca40108cda6edb846)`()` | Get last library (communication) error.
-`public bool `[`isRunning`](#class_v_f_d_1a8901099a8df4962b91df4649ec5155c4)`()` | Gets if inverter is running.
+`public int `[`status`](#class_v_f_d_1a8f0bfeb64b7016f5039d61b2e91362f1)`()` | Gets if inverter is running.
 `public bool `[`isForward`](#class_v_f_d_1a025aec6902a4ddb344bd8ee2be42057e)`()` | Gets if inverter is in forward direction.
 `public bool `[`isBackward`](#class_v_f_d_1a8c831b0bad9c22ab5a064cbc0c440723)`()` | Gets if inverter is in backward direction.
 `public uint16_t `[`getParameter`](#class_v_f_d_1a5c4962544bc44f0629de7059a045fa98)`(uint8_t section,uint8_t param)` | Get a parameter of the inverter.
@@ -239,12 +239,12 @@ Get last library (communication) error.
 #### Returns
 Human readable last error (C-style string)
 
-#### `public bool `[`isRunning`](#class_v_f_d_1a8901099a8df4962b91df4649ec5155c4)`()` 
+#### `public int `[`status`](#class_v_f_d_1a8f0bfeb64b7016f5039d61b2e91362f1)`()` 
 
 Gets if inverter is running.
 
 #### Returns
-true if running, false otherwise
+0 if stopped, 1 if running, 2 if accelerating/decelerating
 
 #### `public bool `[`isForward`](#class_v_f_d_1a025aec6902a4ddb344bd8ee2be42057e)`()` 
 
