@@ -356,10 +356,16 @@ public:
   void setDecelTime(float time);
 
   /**
-     * @brief Get last library (communication) error
+     * @brief Get last library (communication) error as human readable
      * @return Human readable last error (C-style string)
   */
   char* lastCommError();
+  
+  /**
+     * @brief Get last library (communication) error
+     * @return VFD_Comm_Errors of last error
+  */
+  VFD_Comm_Errors lastCommErrorNum();
 
   /**
      * @brief Gets if inverter is running

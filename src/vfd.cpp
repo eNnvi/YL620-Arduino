@@ -353,6 +353,7 @@ void VFD::setSpeed(float speed) {
   writeRegister(VFD_REGISTER_FREQUENCY, (uint16_t)(speed*10));
 }
 
+
 // start the motor
 void VFD::run() {
   if(sendCommand(VFD_COMMAND_START) == VFD_COMM_SUCCESS) running = true;;
@@ -472,6 +473,10 @@ char* VFD::lastCommError() {
     default:
       return "Unknown";
   }
+}
+
+VFD_Comm_Errors VFD::lastCommErrorNum() {
+  return last_error;
 }
 
 // checks if motor is running
