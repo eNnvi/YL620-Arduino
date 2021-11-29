@@ -20,7 +20,7 @@
     @version 0.1a 09/11/2021
 */
 
-#include "vfd.h"
+#include "YL620-Arduino.h"
 
 
 // Private methods

@@ -26,7 +26,7 @@
 `public void `[`setBackward`](#class_v_f_d_1ad5dc9aa34e5ae8e5cbde94391ab7d6cc)`()` | changes direction of the motor to backward (no matter if running or not ?)
 `public void `[`resetError`](#class_v_f_d_1a076d315731acf881c41c0b60979b2b82)`()` | resets last [VFD](#class_v_f_d) error
 `public void `[`resetAllErrors`](#class_v_f_d_1a4c5463a9cbb6b7702a64dd9011a1eed4)`()` | resets all [VFD](#class_v_f_d) error
-`public `[`VFD_Errors`](#vfd_8h_1ae3913d24e126eca942cd7007eade9654)` `[`getError`](#class_v_f_d_1a039fadad070e87c4c0b3e5f8c6113e4f)`()` | returns the [VFD](#class_v_f_d) error
+`public `[`VFD_Errors`](#_y_l620-_arduino_8h_1ae3913d24e126eca942cd7007eade9654)` `[`getError`](#class_v_f_d_1a039fadad070e87c4c0b3e5f8c6113e4f)`()` | returns the [VFD](#class_v_f_d) error
 `public float `[`getRunFreq`](#class_v_f_d_1a9bb628dccf7673e6f79dfa2f43d464a0)`()` | get actual running frequency
 `public uint16_t `[`getCpuID`](#class_v_f_d_1affb69b90f484a72ae9adb18916fdec8b)`()` | get Cpu unique id of the [VFD](#class_v_f_d)
 `public float `[`getAimFreq`](#class_v_f_d_1a5919529c4d66f7db381437aa2e7cc7cb)`()` | get target running frequency
@@ -38,13 +38,13 @@
 `public float `[`getDecelTime`](#class_v_f_d_1a8b890ed8e80ef098083f0a292d4766cd)`()` | Get actual deceleration time.
 `public void `[`setDecelTime`](#class_v_f_d_1af8e1803ee4accbba46a6a5456a202988)`(float time)` | Sets deceleration time.
 `public char * `[`lastCommError`](#class_v_f_d_1ab89a8840263e507ca40108cda6edb846)`()` | Get last library (communication) error as human readable.
-`public `[`VFD_Comm_Errors`](#vfd_8h_1af63f127086426f531de4351494f526d3)` `[`lastCommErrorNum`](#class_v_f_d_1a219705e49a96732b063504e888f0325e)`()` | Get last library (communication) error.
+`public `[`VFD_Comm_Errors`](#_y_l620-_arduino_8h_1af63f127086426f531de4351494f526d3)` `[`lastCommErrorNum`](#class_v_f_d_1a219705e49a96732b063504e888f0325e)`()` | Get last library (communication) error.
 `public int `[`status`](#class_v_f_d_1a8f0bfeb64b7016f5039d61b2e91362f1)`()` | Gets if inverter is running.
 `public bool `[`isForward`](#class_v_f_d_1a025aec6902a4ddb344bd8ee2be42057e)`()` | Gets if inverter is in forward direction.
 `public bool `[`isBackward`](#class_v_f_d_1a8c831b0bad9c22ab5a064cbc0c440723)`()` | Gets if inverter is in backward direction.
 `public uint16_t `[`getParameter`](#class_v_f_d_1a5c4962544bc44f0629de7059a045fa98)`(uint8_t section,uint8_t param)` | Get a parameter of the inverter.
-`public `[`VFD_Comm_Errors`](#vfd_8h_1af63f127086426f531de4351494f526d3)` `[`setParameter`](#class_v_f_d_1afd9e98bfe3a25faa8d67f9be673685ac)`(uint8_t section,uint8_t param,uint16_t value)` | Set a parameter of the inverter.
-`public `[`VFD_Comm_Errors`](#vfd_8h_1af63f127086426f531de4351494f526d3)` `[`update`](#class_v_f_d_1aa68aa1e7624c74748adb0c606d8901f2)`()` | Retrieves all the running parameter of the inverter.
+`public `[`VFD_Comm_Errors`](#_y_l620-_arduino_8h_1af63f127086426f531de4351494f526d3)` `[`setParameter`](#class_v_f_d_1afd9e98bfe3a25faa8d67f9be673685ac)`(uint8_t section,uint8_t param,uint16_t value)` | Set a parameter of the inverter.
+`public `[`VFD_Comm_Errors`](#_y_l620-_arduino_8h_1af63f127086426f531de4351494f526d3)` `[`update`](#class_v_f_d_1aa68aa1e7624c74748adb0c606d8901f2)`()` | Retrieves all the running parameter of the inverter.
 `public float `[`fetchAccelTime`](#class_v_f_d_1a2ecfc52b9a25813091ad9f17012cbe29)`()` | Retrieves Acceleration time from library.
 `public float `[`fetchDecelTime`](#class_v_f_d_1a3c29bb8ce398ede82f059336971d99e8)`()` | Retrieves Deceleration time from library.
 `public float `[`fetchAimFrequency`](#class_v_f_d_1a039e16341fc1714e6e0acd06f5a7ffc8)`()` | Retrieves aim frequency from library.
@@ -156,7 +156,7 @@ resets last [VFD](#class_v_f_d) error
 
 resets all [VFD](#class_v_f_d) error
 
-#### `public `[`VFD_Errors`](#vfd_8h_1ae3913d24e126eca942cd7007eade9654)` `[`getError`](#class_v_f_d_1a039fadad070e87c4c0b3e5f8c6113e4f)`()` 
+#### `public `[`VFD_Errors`](#_y_l620-_arduino_8h_1ae3913d24e126eca942cd7007eade9654)` `[`getError`](#class_v_f_d_1a039fadad070e87c4c0b3e5f8c6113e4f)`()` 
 
 returns the [VFD](#class_v_f_d) error
 
@@ -240,7 +240,7 @@ Get last library (communication) error as human readable.
 #### Returns
 Human readable last error (C-style string)
 
-#### `public `[`VFD_Comm_Errors`](#vfd_8h_1af63f127086426f531de4351494f526d3)` `[`lastCommErrorNum`](#class_v_f_d_1a219705e49a96732b063504e888f0325e)`()` 
+#### `public `[`VFD_Comm_Errors`](#_y_l620-_arduino_8h_1af63f127086426f531de4351494f526d3)` `[`lastCommErrorNum`](#class_v_f_d_1a219705e49a96732b063504e888f0325e)`()` 
 
 Get last library (communication) error.
 
@@ -280,7 +280,7 @@ Get a parameter of the inverter.
 #### Returns
 value of the stored register
 
-#### `public `[`VFD_Comm_Errors`](#vfd_8h_1af63f127086426f531de4351494f526d3)` `[`setParameter`](#class_v_f_d_1afd9e98bfe3a25faa8d67f9be673685ac)`(uint8_t section,uint8_t param,uint16_t value)` 
+#### `public `[`VFD_Comm_Errors`](#_y_l620-_arduino_8h_1af63f127086426f531de4351494f526d3)` `[`setParameter`](#class_v_f_d_1afd9e98bfe3a25faa8d67f9be673685ac)`(uint8_t section,uint8_t param,uint16_t value)` 
 
 Set a parameter of the inverter.
 
@@ -294,7 +294,7 @@ Set a parameter of the inverter.
 #### Returns
 communication error enum
 
-#### `public `[`VFD_Comm_Errors`](#vfd_8h_1af63f127086426f531de4351494f526d3)` `[`update`](#class_v_f_d_1aa68aa1e7624c74748adb0c606d8901f2)`()` 
+#### `public `[`VFD_Comm_Errors`](#_y_l620-_arduino_8h_1af63f127086426f531de4351494f526d3)` `[`update`](#class_v_f_d_1aa68aa1e7624c74748adb0c606d8901f2)`()` 
 
 Retrieves all the running parameter of the inverter.
 

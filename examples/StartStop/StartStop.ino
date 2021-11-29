@@ -33,7 +33,7 @@
     I'm assuming no responsibility for any damage to people or things that can happen when running this sketch!
 
 */
-#include <vfd.h>
+#include <YL620-Arduino.h>
 
 /*
     Make sure VFD parameters are set as follow:

@@ -21,8 +21,8 @@
     @version 0.1a 09/11/2021
 */
 
-#ifndef _VFD_H_
-#define _VFD_H_
+#ifndef _YL620_ARDUINO_H_
+#define _YL620_ARDUINO_H_
 
 
 #include <Arduino.h>
@@ -503,4 +503,4 @@ public:
 };
 
 
-#endif  // _VFD_H_
+#endif  // _YL620_ARDUINO_H_
